@@ -1,291 +1,34 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spectra International Algeria</title>
-  <meta name="description" content="">
-  <meta name="theme-color" content="#0F2542">
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="apple-touch-icon" href="/logo.jpg">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <style type="text/tailwindcss">
-    @theme {
-      --color-ink: #0F2542;
-      --color-navy: #1A3A6B;
-      --color-azure: #1E5FA8;
-      --color-amber: #E8861A;
-      --color-amber-soft: #F5A33A;
-      --color-mist: #F4F6FA;
-      --color-line: #E1E6EE;
-      --color-slate: #5B6A7E;
-      --font-sans: "Inter", "Noto Sans Arabic", system-ui, sans-serif;
-      --font-display: "Bebas Neue", "Noto Sans Arabic", Impact, sans-serif;
-    }
-  </style>
-  <style>
-    html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
-    body { font-family: var(--font-sans); color: #0F2542; background: #fff; -webkit-font-smoothing: antialiased; }
-    .font-display { font-weight: 400 !important; letter-spacing: 0.03em; }
-    [dir="rtl"] .font-display { font-weight: 700 !important; letter-spacing: 0; }
-    :focus-visible { outline: 3px solid #F5A33A; outline-offset: 2px; }
-    .spinner {
-      width: 44px; height: 44px; border-radius: 9999px;
-      border: 4px solid rgba(255, 255, 255, 0.25); border-top-color: #F5A33A;
-      animation: spin 0.8s linear infinite;
-    }
-    .spinner-sm {
-      width: 18px; height: 18px; border-radius: 9999px;
-      border: 2px solid rgba(255, 255, 255, 0.4); border-top-color: #fff;
-      animation: spin 0.7s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-    .rise { animation: rise 0.7s ease-out both; }
-    .route-line { border-inline-start: 2px dashed rgba(255, 255, 255, 0.28); }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .spinner, .spinner-sm { animation-duration: 2s; }
-      .rise { animation: none; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectra International</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 { color: #0056b3; }
+    </style>
 </head>
-<body class="min-h-screen">
-
-  <!-- Loading overlay -->
-  <div id="loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-ink text-white" role="status" aria-live="polite">
-    <div class="spinner" aria-hidden="true"></div>
-    <p id="loader-text" class="text-sm text-white/70"></p>
-  </div>
-
-  <!-- Error panel (shown only when the API cannot be reached) -->
-  <div id="error-panel" class="fixed inset-0 z-40 hidden items-center justify-center bg-mist p-6" role="alert">
-    <div class="w-full max-w-md border border-line bg-white p-8 text-center shadow-sm">
-      <p id="error-message" class="text-lg font-semibold text-ink"></p>
-      <p id="error-detail" class="mt-2 text-sm text-slate"></p>
-      <button id="retry-button" type="button" class="mt-6 inline-flex items-center justify-center bg-amber px-6 py-3 font-semibold text-ink transition hover:bg-amber-soft"></button>
+<body>
+    <div class="container">
+        <h1>Spectra International Algeria</h1>
+        <p>الموقع يعمل بنجاح الآن على منصة Render!</p>
     </div>
-  </div>
-
-  <!-- Header -->
-  <header id="site-header" class="sticky top-0 z-30 border-b border-line bg-white/95 backdrop-blur">
-    <div class="mx-auto flex max-w-6xl items-center gap-4 px-5 py-3">
-      <a href="#hero" class="flex items-center gap-3" aria-label="Spectra">
-        <img id="brand-logo" src="/logo.jpg" alt="" width="44" height="44" class="h-11 w-11 object-contain">
-        <span class="leading-tight">
-          <span class="block font-display text-2xl font-bold tracking-wide text-ink" data-bind="site.name"></span>
-          <span class="block text-xs text-slate" data-bind="site.subName"></span>
-        </span>
-      </a>
-
-      <nav id="main-nav" class="ms-auto hidden items-center gap-1 md:flex" aria-label="Navigation"></nav>
-
-      <div id="lang-switcher" class="ms-auto flex items-center border border-line md:ms-4" role="group"></div>
-
-      <a id="header-whatsapp" href="#contact" target="_blank" rel="noopener" class="hidden items-center bg-amber px-4 py-2 text-sm font-semibold text-ink transition hover:bg-amber-soft lg:inline-flex" data-bind="ui.whatsappCta"></a>
-
-      <button id="menu-toggle" type="button" class="inline-flex h-10 w-10 items-center justify-center border border-line md:hidden" aria-expanded="false" aria-controls="mobile-nav">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
-    </div>
-    <nav id="mobile-nav" class="hidden border-t border-line bg-white px-5 py-3 md:hidden" aria-label="Navigation"></nav>
-  </header>
-
-  <main>
-    <!-- Hero -->
-    <section id="hero" class="relative overflow-hidden bg-ink text-white">
-      <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:grid-cols-12 md:py-24">
-        <div class="rise md:col-span-7">
-          <p class="inline-block border border-white/25 px-3 py-1 text-sm text-white/85" data-bind="hero.badge"></p>
-          <h1 class="mt-6 font-display text-5xl font-bold leading-[0.95] sm:text-6xl md:text-7xl">
-            <span class="block" data-bind="hero.titleLine1"></span>
-            <span class="block text-amber-soft" data-bind="hero.titleLine2"></span>
-          </h1>
-          <p class="mt-6 max-w-xl text-lg leading-relaxed text-white/80" data-bind="hero.text"></p>
-          <div class="mt-9 flex flex-wrap gap-3">
-            <a href="#contact" class="inline-flex items-center bg-amber px-6 py-3 font-semibold text-ink transition hover:bg-amber-soft" data-bind="hero.primaryCta"></a>
-            <a href="#services" class="inline-flex items-center border border-white/35 px-6 py-3 font-semibold text-white transition hover:bg-white/10" data-bind="hero.secondaryCta"></a>
-          </div>
-        </div>
-
-        <aside class="rise md:col-span-5" style="animation-delay: 0.15s" aria-labelledby="route-title">
-          <div class="border border-white/15 bg-white/5 p-6 sm:p-8">
-            <h2 id="route-title" class="font-display text-2xl font-semibold" data-bind="hero.route.title"></h2>
-            <ol id="route-list" class="route-line mt-6 ms-2 space-y-6 ps-6"></ol>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- Stats -->
-    <section aria-label="Statistiques" class="border-b border-line bg-mist">
-      <ul id="stats-list" class="mx-auto grid max-w-6xl grid-cols-2 divide-line px-5 md:grid-cols-4"></ul>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="mx-auto max-w-6xl px-5 py-20">
-      <div class="grid gap-14 lg:grid-cols-12">
-        <div class="lg:col-span-7">
-          <h2 class="font-display text-4xl font-bold text-ink md:text-5xl" data-bind="about.title"></h2>
-          <p class="mt-3 text-lg font-medium text-azure" data-bind="about.subtitle"></p>
-          <h3 class="mt-10 font-display text-2xl font-semibold text-navy" data-bind="about.missionTitle"></h3>
-          <div id="about-mission" class="mt-3 max-w-prose space-y-4 leading-relaxed text-slate"></div>
-          <h3 class="mt-10 font-display text-2xl font-semibold text-navy" data-bind="about.visionTitle"></h3>
-          <p class="mt-3 max-w-prose leading-relaxed text-slate" data-bind="about.vision"></p>
-        </div>
-        <div class="lg:col-span-5">
-          <h3 class="font-display text-2xl font-semibold text-navy" data-bind="about.valuesTitle"></h3>
-          <dl id="about-values" class="mt-5 space-y-6"></dl>
-        </div>
-      </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="bg-mist py-20">
-      <div class="mx-auto max-w-6xl px-5">
-        <div class="max-w-2xl">
-          <p class="font-semibold text-amber" data-bind="services.tag"></p>
-          <h2 class="mt-2 font-display text-4xl font-bold text-ink md:text-5xl" data-bind="services.title"></h2>
-          <p class="mt-4 text-lg leading-relaxed text-slate" data-bind="services.subtitle"></p>
-        </div>
-        <ul id="services-list" class="mt-12 divide-y divide-line border-y border-line"></ul>
-      </div>
-    </section>
-
-    <!-- Process -->
-    <section id="process" class="mx-auto max-w-6xl px-5 py-20">
-      <h2 class="font-display text-4xl font-bold text-ink md:text-5xl" data-bind="process.title"></h2>
-      <ol id="process-list" class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5"></ol>
-    </section>
-
-    <!-- Why Spectra -->
-    <section id="why" class="bg-ink py-20 text-white">
-      <div class="mx-auto max-w-6xl px-5">
-        <div class="max-w-2xl">
-          <h2 class="font-display text-4xl font-bold md:text-5xl" data-bind="why.title"></h2>
-          <p class="mt-4 text-lg leading-relaxed text-white/75" data-bind="why.subtitle"></p>
-        </div>
-        <ul id="why-list" class="mt-12 grid gap-x-12 gap-y-8 md:grid-cols-2"></ul>
-
-        <div class="mt-14 border-t border-white/15 pt-10">
-          <h3 class="font-display text-xl font-semibold text-white/80" data-bind="why.partnersTitle"></h3>
-          <ul id="partners-list" class="mt-5 flex flex-wrap items-stretch gap-4"></ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="mx-auto max-w-6xl px-5 py-20">
-      <div class="grid gap-14 lg:grid-cols-12">
-        <div class="lg:col-span-5">
-          <h2 class="font-display text-4xl font-bold text-ink md:text-5xl" data-bind="contact.title"></h2>
-          <p class="mt-4 text-lg leading-relaxed text-slate" data-bind="contact.intro"></p>
-
-          <div class="mt-8 border border-line bg-mist p-6">
-            <p class="font-display text-xl font-semibold text-navy" data-bind="contact.whatsapp.label"></p>
-            <p class="mt-2 text-sm leading-relaxed text-slate" data-bind="contact.whatsapp.text"></p>
-            <a id="contact-whatsapp" href="#" target="_blank" rel="noopener" class="mt-4 inline-flex items-center bg-amber px-5 py-3 font-semibold text-ink transition hover:bg-amber-soft" data-bind="contact.whatsapp.cta"></a>
-          </div>
-
-          <ul id="contact-links" class="mt-8 space-y-3"></ul>
-          <ul id="contact-socials" class="mt-6 flex flex-wrap gap-3"></ul>
-
-          <h3 class="mt-10 font-display text-2xl font-semibold text-navy" data-bind="contact.areas.title"></h3>
-          <p class="mt-2 leading-relaxed text-slate" data-bind="contact.areas.text"></p>
-          <p class="mt-5 text-sm font-semibold text-ink" data-bind="contact.areas.networkTitle"></p>
-          <ul id="contact-countries" class="mt-2 flex flex-wrap gap-2"></ul>
-
-          <ul id="contact-guarantees" class="mt-10 space-y-5"></ul>
-        </div>
-
-        <div class="lg:col-span-7">
-          <form id="contact-form" class="border border-line bg-white p-6 shadow-sm sm:p-8" novalidate>
-            <h3 class="font-display text-3xl font-bold text-ink" data-bind="contact.form.title"></h3>
-            <p class="mt-2 text-slate" data-bind="contact.form.intro"></p>
-
-            <div class="mt-8 grid gap-5 sm:grid-cols-2">
-              <div>
-                <label for="lastName" class="mb-1 block text-sm font-semibold" data-bind="contact.form.labels.lastName"></label>
-                <input id="lastName" name="lastName" type="text" autocomplete="family-name" maxlength="60" required class="w-full border border-line px-3 py-3 focus:border-azure" aria-describedby="err-lastName">
-                <p id="err-lastName" class="mt-1 min-h-5 text-sm text-red-700" role="alert"></p>
-              </div>
-              <div>
-                <label for="firstName" class="mb-1 block text-sm font-semibold" data-bind="contact.form.labels.firstName"></label>
-                <input id="firstName" name="firstName" type="text" autocomplete="given-name" maxlength="60" required class="w-full border border-line px-3 py-3 focus:border-azure" aria-describedby="err-firstName">
-                <p id="err-firstName" class="mt-1 min-h-5 text-sm text-red-700" role="alert"></p>
-              </div>
-              <div>
-                <label for="activity" class="mb-1 block text-sm font-semibold" data-bind="contact.form.labels.activity"></label>
-                <select id="activity" name="activity" required class="w-full border border-line bg-white px-3 py-3 focus:border-azure" aria-describedby="err-activity"></select>
-                <p id="err-activity" class="mt-1 min-h-5 text-sm text-red-700" role="alert"></p>
-              </div>
-              <div>
-                <label for="wilaya" class="mb-1 block text-sm font-semibold" data-bind="contact.form.labels.wilaya"></label>
-                <select id="wilaya" name="wilaya" required class="w-full border border-line bg-white px-3 py-3 focus:border-azure" aria-describedby="err-wilaya"></select>
-                <p id="err-wilaya" class="mt-1 min-h-5 text-sm text-red-700" role="alert"></p>
-              </div>
-              <div>
-                <label for="phone" class="mb-1 block text-sm font-semibold" data-bind="contact.form.labels.phone"></label>
-                <input id="phone" name="phone" type="tel" dir="ltr" autocomplete="tel" maxlength="24" required class="w-full border border-line px-3 py-3 text-start focus:border-azure" data-bind-attr="placeholder:contact.form.placeholders.phone" aria-describedby="err-phone">
-                <p id="err-phone" class="mt-1 min-h-5 text-sm text-red-700" role="alert"></p>
-              </div>
-              <div>
-                <label for="email" class="mb-1 block text-sm font-semibold" data-bind="contact.form.labels.email"></label>
-                <input id="email" name="email" type="email" dir="ltr" autocomplete="email" maxlength="120" required class="w-full border border-line px-3 py-3 text-start focus:border-azure" data-bind-attr="placeholder:contact.form.placeholders.email" aria-describedby="err-email">
-                <p id="err-email" class="mt-1 min-h-5 text-sm text-red-700" role="alert"></p>
-              </div>
-              <div class="sm:col-span-2">
-                <label for="message" class="mb-1 block text-sm font-semibold" data-bind="contact.form.labels.message"></label>
-                <textarea id="message" name="message" rows="5" maxlength="2000" required class="w-full border border-line px-3 py-3 focus:border-azure" data-bind-attr="placeholder:contact.form.placeholders.message" aria-describedby="err-message"></textarea>
-                <p id="err-message" class="mt-1 min-h-5 text-sm text-red-700" role="alert"></p>
-              </div>
-            </div>
-
-            <!-- Honeypot anti-spam: invisible for humans -->
-            <div class="absolute -start-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
-              <label for="website">Website</label>
-              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
-            </div>
-
-            <div class="mt-4 flex flex-wrap items-center gap-4">
-              <button id="submit-button" type="submit" class="inline-flex min-w-48 items-center justify-center gap-3 bg-navy px-6 py-3 font-semibold text-white transition hover:bg-azure disabled:cursor-not-allowed disabled:opacity-70">
-                <span id="submit-spinner" class="spinner-sm hidden" aria-hidden="true"></span>
-                <span id="submit-label"></span>
-              </button>
-              <p id="form-status" class="text-sm font-medium" role="status" aria-live="polite"></p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-ink text-white">
-    <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-12">
-      <div class="md:col-span-5">
-        <p class="font-display text-3xl font-bold tracking-wide" data-bind="site.name"></p>
-        <p class="mt-3 max-w-md text-sm leading-relaxed text-white/70" data-bind="site.footerText"></p>
-      </div>
-      <div class="md:col-span-3">
-        <p class="font-display text-lg font-semibold" data-bind="ui.footerNav"></p>
-        <ul id="footer-nav" class="mt-3 space-y-2 text-sm text-white/70"></ul>
-      </div>
-      <div class="md:col-span-4">
-        <p class="font-display text-lg font-semibold" data-bind="ui.footerContact"></p>
-        <ul id="footer-contact" class="mt-3 space-y-2 text-sm text-white/70"></ul>
-        <p class="mt-6 font-display text-lg font-semibold" data-bind="ui.footerSocial"></p>
-        <ul id="footer-socials" class="mt-3 flex flex-wrap gap-4 text-sm text-white/70"></ul>
-      </div>
-    </div>
-    <div class="border-t border-white/10 px-5 py-5 text-center text-xs text-white/55" data-bind="site.copyright"></div>
-  </footer>
-
-  <script src="/app.js" defer></script>
 </body>
 </html>
